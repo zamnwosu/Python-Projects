@@ -1,0 +1,80 @@
+# Name: Zam Nwosu
+# Input: a date in the format mm/dd/yyyy
+# Output: 1) If the date is entered incorrectly tell user to try again 2) The date printed in standard format
+# Process: 1) Get date 2) turn it into list 3) turn date into standard form 4) print date
+
+def SplitDate():
+    date = input("Enter a day in the format: mm/dd/yyyy: ")
+    dateList = date.split('/')
+    totalList = list(date)
+
+    ChangeDate(dateList, totalList)
+
+def ChangeDate(dateList, totalList):
+    try:
+        month = dateList[0]
+        day = dateList[1]
+        year = dateList[2]
+    except ValueError:
+        print("A Value Error has occured! Try again")
+        return SplitDate()
+    except IOError:
+        print("An IO Error has occured! Try again")
+        return SplitDate()
+    except IndexError:
+        print("An Index Error has occured! Invalid date format! Try again")
+        return SplitDate()
+    else:
+
+        while len(dateList) != 3:
+            print("The date you entered is in the wrong format! Try again")
+            return SplitDate()
+        while len(totalList) > 10:
+            print("The date format is too long! There needs to be the proper number of digits! Invalid input! Try again")
+            return SplitDate()
+        while len(totalList) < 10:
+            print("The date format is too short! There needs to be the proper number of digits! Invalid input! Try again")
+            return SplitDate()
+
+    ValueCheck(month, day, year)
+        
+def ValueCheck(month, day, year):
+    while int(month) not in range(1,13):
+        print("Month entered is an invalid value! Try again")
+        return SplitDate()
+    while int(day) not in range(1,32):
+        print("Day entered is an invalid value! Try again")
+        return SplitDate()
+    while int(year) < 1000 and int(year) < 2022:
+        print("Year entered is an invalid value! Try again")
+        return SplitDate()
+    while int(year) > 2021:
+        print("Year entered is too big and doesn't exist (Invalid) ! Try again")
+        return SplitDate()
+        
+    GetMonths(month, day, year)
+    
+def GetMonths(month, day, year):
+    differentMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    monthNumber = int(month)-1
+    monthPrint = differentMonths[monthNumber]
+    
+    formattedYear = '{:0>4}'.format(year) 
+    formattedDay = '{:0>2}'.format(day)
+    print(monthPrint, formattedDay +",", formattedYear)
+    
+    OnceAgain()    
+
+def OnceAgain():
+    again = input("Type 'continue' to keep going or type 'quit' to stop the program: ")
+    while again != 'continue' and again != 'quit':
+        print("Please select a valid option!")
+        again = input("Type 'continue' to keep going or type 'quit' to stop the program: ")
+    if again == 'continue':
+        SplitDate()
+    elif again == 'quit':
+        print("Quitting the program...")
+        print("END")
+
+        
+SplitDate()
