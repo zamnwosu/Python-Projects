@@ -1,0 +1,116 @@
+# Zam Nwosu
+# Purpose: Help user choose a book they’ll like
+# Input: 1) Age range or random selection 2) Preferred genre
+# Process: 1) Check for errors 2) Associate input with list indexes
+# Output: 1) Book name 2) Book author 3) Page count 4) Error message from input
+
+print("Hello! Today, we'll help you pick out a book!")
+
+def PickAge ():
+    newAge = 0
+    import random
+    randomList = random.sample(range(1, 9), 1)
+    print("age ranges:")
+    print("1) kids \n2) teens \n3) adults")
+    age = input("pick an age range or type 'random' to have us select a book randomly: ")
+    print("---------------")
+    while age.lower() != 'kids' and age.lower() != 'teens' and age.lower() != 'adults' and age.lower() != 'random':
+        print("invalid input! please select a proper choice!")
+        age = input("pick an age range or type 'random' to have us select a book randomly:  ")
+        print("---------------")
+    else:
+        if age.lower() == 'kids':
+            newAge = 1
+        if age.lower() == 'teens':
+            newAge = 2
+        if age.lower() == 'adults':
+            newAge = 3
+        if age.lower() == 'random':
+            newAge = 4
+    
+    ChooseRandom(newAge, randomList)
+ 
+def ChooseRandom (newAge, randomList):
+    # books are listed in order from non-fiction, fantasy, poetry and repeated for each age group
+    books = ["Balloons Over Broadway: The True Story of the Puppeteer of Macy's Parade", 'Barty the Dragon', 'A Light in the Attic', 'What was the Battle of Gettysburg?', 'Shatter Me', 'Edgar Allan Poe: The Complete Collection', 'Hiroshima', "The Lies of Locke Lamora", 'Ink Knows No Borders: Poems of the Immigrant and Refugee Experience'] # first three books are childrens, next 3 are teens, next three are adults
+    authors = ['Melissa Sweet', 'Gabe Trieu', 'Shel Silverstein', "Jim O'Connor", 'Tahereh Mafi', 'Edgar Allan Poe', 'John Hersey', 'Scott Lynch', 'Alyssa Raymond and Patrice Vecchione'] # the authors correspond with books (meaning same order)
+    pageNumbers = ['40 pages', '54 pages', '169 pages', '112 pages', '464 pages', '5639 pages', '160 pages', '499 pages', '225 pages'] # the page numbers also correspond
+    if newAge == 4:
+        n = int(randomList[0]) - 1
+        print("the book we choose for you is: ")
+        print("book: ", books[n], "\nauthor: ", authors[n], "\nbook length: ", pageNumbers[n])
+        
+    PickGenre(newAge, books, authors, pageNumbers)
+    
+def PickGenre(newAge, books, authors, pageNumbers):
+    newGenre = 0
+    if newAge != 4:
+        print("genres:")
+        print("1) non-fiction \n2) fantasy \n3) poetry")
+        genre = input("please pick a genre for your book: ")
+        print("---------------")
+        while genre.lower() != 'non-fiction' and genre.lower() != 'fantasy' and genre.lower() != 'poetry':
+            print("invalid input! please select a proper choice!")
+            genre = input("please pick a genre for your book: ")
+            print("---------------")
+        else:
+            if genre.lower() == 'non-fiction':
+                newGenre = 1
+            if genre.lower() == 'fantasy':
+                newGenre = 2
+            if genre.lower() == 'poetry':
+                newGenre = 3
+    
+    DisplayBook(newAge, books, authors, pageNumbers, newGenre)
+    
+def DisplayBook(newAge, books, authors, pageNumbers, newGenre):
+    while newAge != 4:
+        if newAge == 1:
+            if newGenre == 1:
+                print("the book we choose for you is: ")
+                print("book: ", books[0], "\nauthor: ", authors[0], "\nbook length: ", pageNumbers[0])
+            if newGenre == 2:
+                print("the book we choose for you is: ")
+                print("book: ", books[1], "\nauthor: ", authors[1], "\nbook length: ", pageNumbers[1])
+            if newGenre == 3:
+                print("the book we choose for you is: ")
+                print("book: ", books[2], "\nauthor: ", authors[2], "\nbook length: ", pageNumbers[2])
+            break
+        if newAge == 2:
+            if newGenre == 1:
+                print("the book we choose for you is: ")
+                print("book: ", books[3], "\nauthor: ", authors[3], "\nbook length: ", pageNumbers[3])
+            if newGenre == 2:
+                print("the book we choose for you is: ")
+                print("book: ", books[4], "\nauthor: ", authors[4], "\nbook length: ", pageNumbers[4])
+            if newGenre == 3:
+                print("the book we choose for you is: ")
+                print("book: ", books[5], "\nauthor: ", authors[5], "\nbook length: ", pageNumbers[5])
+            break
+        if newAge == 3:
+            if newGenre == 1:
+                print("the book we choose for you is: ")
+                print("book: ", books[6], "\nauthor: ", authors[6], "\nbook length: ", pageNumbers[6])
+            if newGenre == 2:
+                print("the book we choose for you is: ")
+                print("book: ", books[7], "\nauthor: ", authors[7], "\nbook length: ", pageNumbers[7])
+            if newGenre == 3:
+                print("the book we choose for you is: ")
+                print("book: ", books[8], "\nauthor: ", authors[8], "\nbook length: ", pageNumbers[8])
+            break
+    print("DONE!")
+    
+    OnceAgain()
+
+def OnceAgain():
+    again = input("Type 'continue' to keep going or type 'quit' to stop the program: ")
+    while again.lower() != 'continue' and again.lower() != 'quit':
+        print("Please select a valid option!")
+        again = input("Type 'continue' to keep going or type 'quit' to stop the program: ")
+    if again.lower() == 'continue':
+        PickAge ()
+    elif again.lower() == 'quit':
+        print("Quitting the program...")
+        print("END")
+
+PickAge ()
