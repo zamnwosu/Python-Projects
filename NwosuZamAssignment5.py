@@ -1,0 +1,28 @@
+# Name: Zam Nwosu
+# Input: A text file with integers
+# Output: The average of the integers or an error message
+# Process: 1) Get file 2) Read file 3) Calculate average 4) Print average or print error message
+
+def find_average():
+    try:
+        file_numbers = open("numbers.txt", "r")
+        total = 0
+        line_numbers = 0
+        line = file_numbers.readline()
+        
+        while line != "":
+            line_numbers += 1
+            total += int(line)
+            line = file_numbers.readline()
+        
+        average = total / line_numbers
+    except IOError:
+        print("an IO error occured")
+        print("press enter")
+    except ValueError:
+        print("VALUE ERROR: please enter valid integers")
+        print("press enter")
+    else:
+        print("the average is", (format(average, ',.2f')))
+            
+find_average()
